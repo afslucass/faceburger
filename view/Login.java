@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Login {
     private JPanel panel;
@@ -68,7 +70,7 @@ public class Login {
         return panel;
     }
 
-    public void destroy() {
-        panel.removeAll();
+    public JButton getContinueButton() {
+        return continueButton;
     }
 }

@@ -15,6 +15,8 @@ public class Post {
     private JLabel name;
     private JScrollPane scroll;
 
+    private JButton button;
+
     public Post() {
         this.panel = new JPanel();
 
@@ -23,6 +25,8 @@ public class Post {
 
         this.name = new JLabel("Lucas");
         this.scroll = new JScrollPane(this.right);
+
+        this.button = new JButton("Publicar");
     }
 
     private void makeLeftPanel() {
@@ -93,8 +97,7 @@ public class Post {
         this.right.add(Box.createVerticalStrut(120));
         this.right.add(createMessageBox());
         this.right.add(Box.createVerticalStrut(24));
-        JButton button = new JButton("Publicar");
-        this.right.add(button);
+        this.right.add(this.button);
         button.setMinimumSize(new Dimension(120, 60));
         button.setMaximumSize(new Dimension(120, 60));
     }
@@ -126,7 +129,7 @@ public class Post {
         return panel;
     }
 
-    public void destroy() {
-        panel.removeAll();
+    public JButton getPostButton() {
+        return this.button;
     }
 }

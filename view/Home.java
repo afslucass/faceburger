@@ -15,6 +15,8 @@ public class Home {
     private JLabel name;
     private JScrollPane scroll;
 
+    private JButton newPost;
+
     public Home() {
         this.panel = new JPanel();
 
@@ -23,6 +25,8 @@ public class Home {
 
         this.name = new JLabel("Lucas");
         this.scroll = new JScrollPane(this.right);
+
+        this.newPost = new JButton("Novo");
     }
 
     private void makeLeftPanel() {
@@ -38,6 +42,9 @@ public class Home {
         this.name.setFont(currentFont.deriveFont(24f));
         this.left.add(pnlCircle);
         this.left.add(this.name);
+
+        this.newPost.setBounds(25, 160, 80, 40);
+        this.left.add(this.newPost);
     }
 
     private JPanel createMessageBox() {
@@ -128,7 +135,7 @@ public class Home {
         return panel;
     }
 
-    public void destroy() {
-        panel.removeAll();
+    public JButton getNewButton() {
+        return this.newPost;
     }
 }

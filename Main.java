@@ -11,18 +11,27 @@ public class Main {
         JFrame frame = new JFrame("Faceburger");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Login login = new Login();  
-        // login.makePanel();
-        // frame.add(login.getPanel());
+        CardLayout cardLayout = new CardLayout();
+        JPanel mainPanel = new JPanel(cardLayout);
 
-        // Home home = new Home();
-        // home.makePanel();
-        // frame.add(home.getPanel());
+        Login login = new Login();  
+        login.makePanel();
+
+        Home home = new Home();
+        home.makePanel();
 
         Post post = new Post();
         post.makePanel();
-        frame.add(post.getPanel());
-        post.destroy();
+
+        mainPanel.add(login.getPanel(), "login");
+        mainPanel.add(home.getPanel(), "home");
+        mainPanel.add(post.getPanel(), "post");
+
+        login.getContinueButton().addActionListener(e -> cardLayout.show(mainPanel, "home"));
+        home.getNewButton().addActionListener(e -> cardLayout.show(mainPanel, "post"));
+        post.getPostButton().addActionListener(e -> cardLayout.show(mainPanel, "home"));
+        
+        frame.add(mainPanel);
 
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
