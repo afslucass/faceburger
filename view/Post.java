@@ -125,4 +125,8 @@ public class Post {
     public JPanel getPanel() {
         return panel;
     }
+
+    public void destroy() {
+        panel.removeAll();
+    }
 }

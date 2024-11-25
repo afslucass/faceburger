@@ -127,4 +127,8 @@ public class Home {
     public JPanel getPanel() {
         return panel;
     }
+
+    public void destroy() {
+        panel.removeAll();
+    }
 }

@@ -22,6 +22,7 @@ public class Main {
         Post post = new Post();
         post.makePanel();
         frame.add(post.getPanel());
+        post.destroy();
 
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
