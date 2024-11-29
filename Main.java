@@ -21,7 +21,7 @@ public class Main {
         Login login = new Login();  
         login.makePanel();
 
-        Home home = new Home(currentUser);
+        Home home = new Home();
         home.makePanel();
 
         Post post = new Post();
@@ -37,6 +37,7 @@ public class Main {
             currentUser.setNick(login.getNameInputText());
             user.adicionaUser(currentUser);
             home.updateCurrentUser(currentUser);
+            post.updateCurrentUser(currentUser);
 
             cardLayout.show(mainPanel, "home");
         });

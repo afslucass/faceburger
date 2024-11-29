@@ -23,8 +23,8 @@ public class Home {
 
     private JButton newPost;
 
-    public Home(User currentUser) {
-        this.currentUser = currentUser;
+    public Home() {
+        this.currentUser = new User();
 
         this.panel = new JPanel();
 

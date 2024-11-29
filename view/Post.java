@@ -2,11 +2,14 @@ package view;
 
 import javax.swing.*;
 
+import model.User;
 import view.components.Avatar;
 
 import java.awt.*;
 
 public class Post {
+    private User currentUser;
+
     private JPanel panel;
 
     private JPanel left;
@@ -18,12 +21,14 @@ public class Post {
     private JButton button;
 
     public Post() {
+        this.currentUser = new User();
+
         this.panel = new JPanel();
 
         this.left = new JPanel();
         this.right = new JPanel();
 
-        this.name = new JLabel("Lucas");
+        this.name = new JLabel(this.currentUser.getNick());
         this.scroll = new JScrollPane(this.right);
 
         this.button = new JButton("Publicar");
@@ -131,5 +136,10 @@ public class Post {
 
     public JButton getPostButton() {
         return this.button;
+    }
+
+    public void updateCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+        this.name.setText(this.currentUser.getNick());
     }
 }
