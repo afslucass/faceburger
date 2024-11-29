@@ -1,9 +1,10 @@
 package view;
 
 import javax.swing.*;
+
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class Login {
     private JPanel panel;
@@ -32,7 +33,7 @@ public class Login {
         this.continueButton = new JButton("Entrar");
     }
 
-    public void makePanel() {
+    public void makePanel() throws SQLException {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -61,6 +62,7 @@ public class Login {
         this.continueButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.continueButton.setPreferredSize(new Dimension(180, 32));
         this.continueButton.setMaximumSize(new Dimension(180, 32));
+
         panel.add(this.continueButton);
 
         panel.add(Box.createVerticalGlue());
@@ -68,6 +70,10 @@ public class Login {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public String getNameInputText() {
+        return this.name.getText();
     }
 
     public JButton getContinueButton() {

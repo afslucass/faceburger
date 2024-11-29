@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import controller.MessageActions;
 import model.Message;
+import model.User;
 import view.components.Avatar;
 
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Home {
+    private User currentUser;
     private JPanel panel;
 
     private JPanel left;
@@ -21,13 +23,15 @@ public class Home {
 
     private JButton newPost;
 
-    public Home() {
+    public Home(User currentUser) {
+        this.currentUser = currentUser;
+
         this.panel = new JPanel();
 
         this.left = new JPanel();
         this.right = new JPanel();
 
-        this.name = new JLabel("Lucas");
+        this.name = new JLabel(currentUser.getNick());
         this.scroll = new JScrollPane(this.right);
 
         this.newPost = new JButton("Novo");
@@ -143,5 +147,10 @@ public class Home {
 
     public JButton getNewButton() {
         return this.newPost;
+    }
+
+    public void updateCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+        this.name.setText(this.currentUser.getNick());
     }
 }

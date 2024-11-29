@@ -20,11 +20,10 @@ public class UserActions implements UserDAO{
 
 	@Override
 	public boolean adicionaUser(User user) {
-		
+
 		try {
 			PreparedStatement ps = 
-					conn.prepareStatement("INSERT INTO LOGIN (userLogin) "+
-											"VALUES (?)");
+					conn.prepareStatement("INSERT INTO usuario (nome_usuario) VALUES (?)");
 			ps.setString(1, user.getNick());
 			
 			ps.executeUpdate();
