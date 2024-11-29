@@ -2,11 +2,14 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import config.ConnectionBD;
 import model.Message;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class MessageActions implements MessageDAO {
 	
@@ -20,8 +23,47 @@ public class MessageActions implements MessageDAO {
 	}
 
 	@Override
-	public List<Message> getAllMessages() {
-		return null;
+	public ArrayList<Message> getAllMessages() {
+		ArrayList<Message> lista = new ArrayList<>();
+
+        String sql = "select nome_usuario, mensagem from usuario inner join mensagem on FK_ID_USUARIO = id_usuario;";
+        
+        try {
+            
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Message message = new Message();
+
+                message.setMessage(rs.getString("mensagem"));
+				message.setNick(rs.getString("nome_usuario"));
+
+                // Calendar data = Calendar.getInstance();
+                // data.setTime(rs.getDate("dataNascimento"));
+                // message.setDataNascimento(data);
+
+                lista.add(message);
+            }
+
+            stmt.close();
+            
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } finally {
+            
+            try {
+                
+                conn.close();
+
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        
+        }
+        
+        return lista;
 	}
 
 	@Override

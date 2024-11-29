@@ -2,9 +2,13 @@ package view;
 
 import javax.swing.*;
 
+import controller.MessageActions;
+import model.Message;
 import view.components.Avatar;
 
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Home {
     private JPanel panel;
@@ -47,7 +51,7 @@ public class Home {
         this.left.add(this.newPost);
     }
 
-    private JPanel createMessageBox() {
+    private JPanel createMessageBox(String messageString, String nickString) {
         Color backgroudColor = new Color(217, 217, 217);
         JPanel messageBox = new JPanel();
         JPanel header = new JPanel();
@@ -74,7 +78,7 @@ public class Home {
         pnlCircle.setMaximumSize(new Dimension(40, 40));
         pnlCircle.setPreferredSize(new Dimension(40, 40));
 
-        JLabel messageName = new JLabel("Lucas");
+        JLabel messageName = new JLabel(nickString);
         Font currentFont = messageName.getFont();
         messageName.setFont(currentFont.deriveFont(12f));
 
@@ -82,7 +86,7 @@ public class Home {
         header.add(Box.createHorizontalStrut(2));
         header.add(messageName);
 
-        JTextArea messageText = new JTextArea("Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio");
+        JTextArea messageText = new JTextArea(messageString);
         Font messageTextFont = messageName.getFont();
         messageText.setFont(messageTextFont.deriveFont(10f));
         messageText.setBackground(backgroudColor);
@@ -96,19 +100,21 @@ public class Home {
         return messageBox;
     }
 
-    private void makeRightPanel() {
+    private void makeRightPanel() throws SQLException {
         this.right.setLayout(new BoxLayout(this.right, BoxLayout.Y_AXIS));
+        MessageActions messages = new MessageActions();
+        ArrayList<Message> mensagens = messages.getAllMessages();
 
-        for(int i = 1; i <= 10; i++){
-            if(i == 1) {
+        for(int i = 0; i <= mensagens.size()-1; i++){
+            if(i == 0) {
                 this.right.add(Box.createVerticalStrut(90));
             }
-            this.right.add(createMessageBox());
+            this.right.add(createMessageBox(mensagens.get(i).getMessage(), mensagens.get(i).getNick()));
             this.right.add(Box.createVerticalStrut(32));
         }
     }
 
-    public void makePanel() {
+    public void makePanel() throws SQLException {
         panel.setLayout(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();

@@ -8,9 +8,9 @@ public class ConnectionBD {
 	
 	public static Connection getConnection()
 	{
-		String url = "jdbc:mysql://localhost:3306/faceburger";
+		String url = "jdbc:mysql://localhost:3306/faceburguer";
 		String user = "root";
-		String password = "root";
+		String password = "123456";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
