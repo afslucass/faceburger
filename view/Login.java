@@ -45,18 +45,6 @@ public class Login {
         this.name.setMaximumSize(new Dimension(180, 32));
         panel.add(this.name);
 
-        this.dbUrlLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(this.dbUrlLabel);
-        this.dbUrl.setPreferredSize(new Dimension(180, 32));
-        this.dbUrl.setMaximumSize(new Dimension(180, 32));
-        panel.add(this.dbUrl);
-
-        this.dbPasswordLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(this.dbPasswordLabel);
-        this.dbPassword.setPreferredSize(new Dimension(180, 32));
-        this.dbPassword.setMaximumSize(new Dimension(180, 32));
-        panel.add(this.dbPassword);
-
         panel.add(Box.createVerticalStrut(12));
 
         this.continueButton.setAlignmentX(Component.CENTER_ALIGNMENT);
