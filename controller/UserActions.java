@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import config.ConnectionBD;
@@ -29,22 +30,19 @@ public class UserActions implements UserDAO{
 			currentUser.setNick(user.getNick());
 
 			PreparedStatement ps = 
-					conn.prepareStatement("INSERT INTO usuario (nome_usuario) VALUES (?)");
+					conn.prepareStatement("INSERT INTO usuario (nome_usuario) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getNick());
 			
-			ps.executeUpdate();
+			int affectedRows = ps.executeUpdate();
+
+			if (affectedRows > 0) {
+                ResultSet generatedKeys = ps.getGeneratedKeys();
+				generatedKeys.next();
+				int generatedId = generatedKeys.getInt(1);
+				currentUser.setId(generatedId);
+			}   
+
 			ps.close();
-
-			String sql = "select id_usuario from usuario where nome_usuario="+user.getNick();
-			
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				currentUser.setId(rs.getInt("id_usuario"));
-			}
-
-			stmt.close();
-			
 			
 		} catch (Exception e) {
 			

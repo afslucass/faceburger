@@ -26,7 +26,7 @@ public class MessageActions implements MessageDAO {
 	public ArrayList<Message> getAllMessages() {
 		ArrayList<Message> lista = new ArrayList<>();
 
-        String sql = "select nome_usuario, mensagem from usuario inner join mensagem on FK_ID_USUARIO = id_usuario;";
+        String sql = "select nome_usuario, mensagem from usuario inner join mensagem on FK_ID_USUARIO = id_usuario order by id_mensagem desc;";
         
         try {
             
@@ -58,7 +58,7 @@ public class MessageActions implements MessageDAO {
 		
 		try {
 			PreparedStatement ps = 
-					conn.prepareStatement("INSERT INTO mensagem (MENSAGEM, FK_ID_USUARIO) VALUES (?, ?)");
+					conn.prepareStatement("INSERT INTO mensagem (MENSAGEM, FK_ID_USUARIO) VALUES (?, ?)");				
 			ps.setString(1, message.getMessage());
 			ps.setInt(2, userId);
 			

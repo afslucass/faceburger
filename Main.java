@@ -41,7 +41,8 @@ public class Main {
             ArrayList<Message> mensagens = messages.getAllMessages();
 
             currentUser.setNick(login.getNameInputText());
-            currentUser.setId(user.adicionaUser(currentUser).getId());
+            User newUser = user.adicionaUser(currentUser);
+            currentUser.setId(newUser.getId());
             home.updateCurrentUser(currentUser);
             home.setMessages(mensagens);
             
@@ -51,6 +52,7 @@ public class Main {
         });
         home.getNewButton().addActionListener(e -> cardLayout.show(mainPanel, "post"));
         post.getPostButton().addActionListener(e -> {
+            messages.addMessage(post.getNewMessage(), currentUser.getId());
             ArrayList<Message> mensagens = messages.getAllMessages();
 
             home.setMessages(mensagens);

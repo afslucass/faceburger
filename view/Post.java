@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 
+import model.Message;
 import model.User;
 import view.components.Avatar;
 
@@ -21,6 +22,8 @@ public class Post {
 
     private JButton button;
 
+    JTextArea messageText;
+
     public Post() {
         this.currentUser = new User();
         
@@ -34,6 +37,8 @@ public class Post {
         this.scroll = new JScrollPane(this.right);
 
         this.button = new JButton("Publicar");
+
+        messageText = new JTextArea("Digite sua mensagem");
     }
 
     private void makeLeftPanel() {
@@ -86,7 +91,6 @@ public class Post {
         header.add(Box.createHorizontalStrut(2));
         header.add(messageName);
 
-        JTextArea messageText = new JTextArea("Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio Algum texto aleatorio");
         Font messageTextFont = messageName.getFont();
         messageText.setFont(messageTextFont.deriveFont(10f));
         messageText.setWrapStyleWord(true); // Quebra de palavras completa
@@ -143,5 +147,11 @@ public class Post {
         this.currentUser = currentUser;
         this.name.setText(this.currentUser.getNick());
         this.messageName.setText(this.currentUser.getNick());
+    }
+
+    public Message getNewMessage() {
+        Message men = new Message();
+        men.setMessage(messageText.getText());
+        return men;
     }
 }

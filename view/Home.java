@@ -110,6 +110,7 @@ public class Home {
 
     private void makeRightPanel() {
         this.right.setLayout(new BoxLayout(this.right, BoxLayout.Y_AXIS));
+        this.right.removeAll();
 
         for(int i = 0; i <= mensagens.size()-1; i++){
             if(i == 0) {
