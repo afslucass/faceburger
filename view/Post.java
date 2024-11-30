@@ -16,19 +16,21 @@ public class Post {
     private JPanel right;
 
     private JLabel name;
+    private JLabel messageName;
     private JScrollPane scroll;
 
     private JButton button;
 
     public Post() {
         this.currentUser = new User();
-
+        
         this.panel = new JPanel();
-
+        
         this.left = new JPanel();
         this.right = new JPanel();
-
-        this.name = new JLabel(this.currentUser.getNick());
+        
+        this.messageName = new JLabel();
+        this.name = new JLabel();
         this.scroll = new JScrollPane(this.right);
 
         this.button = new JButton("Publicar");
@@ -77,7 +79,6 @@ public class Post {
         pnlCircle.setMaximumSize(new Dimension(40, 40));
         pnlCircle.setPreferredSize(new Dimension(40, 40));
 
-        JLabel messageName = new JLabel("Lucas");
         Font currentFont = messageName.getFont();
         messageName.setFont(currentFont.deriveFont(12f));
 
@@ -141,5 +142,6 @@ public class Post {
     public void updateCurrentUser(User currentUser) {
         this.currentUser = currentUser;
         this.name.setText(this.currentUser.getNick());
+        this.messageName.setText(this.currentUser.getNick());
     }
 }

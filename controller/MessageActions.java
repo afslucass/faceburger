@@ -38,10 +38,6 @@ public class MessageActions implements MessageDAO {
                 message.setMessage(rs.getString("mensagem"));
 				message.setNick(rs.getString("nome_usuario"));
 
-                // Calendar data = Calendar.getInstance();
-                // data.setTime(rs.getDate("dataNascimento"));
-                // message.setDataNascimento(data);
-
                 lista.add(message);
             }
 
@@ -51,15 +47,6 @@ public class MessageActions implements MessageDAO {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
-            
-            try {
-                
-                conn.close();
-
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
         
         }
         
@@ -67,15 +54,13 @@ public class MessageActions implements MessageDAO {
 	}
 
 	@Override
-	public boolean addMessage(Message user) {
+	public boolean addMessage(Message message, int userId) {
 		
 		try {
 			PreparedStatement ps = 
-					conn.prepareStatement("INSERT INTO LOGIN (userLogin,senhaLogin,perfilUser) "+
-											"VALUES (?,?,?)");
-			ps.setString(1, user.getNick());
-			ps.setString(2, user.getMessage());
-			ps.setString(3, user.getCreatedAt());
+					conn.prepareStatement("INSERT INTO mensagem (MENSAGEM, FK_ID_USUARIO) VALUES (?, ?)");
+			ps.setString(1, message.getMessage());
+			ps.setInt(2, userId);
 			
 			ps.executeUpdate();
 			ps.close();

@@ -2,10 +2,13 @@ package controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import config.ConnectionBD;
+import model.Message;
 import model.User;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class UserActions implements UserDAO{
 	
@@ -19,20 +22,34 @@ public class UserActions implements UserDAO{
 	}
 
 	@Override
-	public boolean adicionaUser(User user) {
+	public User adicionaUser(User user) {
+		User currentUser = new User();
 
 		try {
+			currentUser.setNick(user.getNick());
+
 			PreparedStatement ps = 
 					conn.prepareStatement("INSERT INTO usuario (nome_usuario) VALUES (?)");
 			ps.setString(1, user.getNick());
 			
 			ps.executeUpdate();
 			ps.close();
-			return true;
+
+			String sql = "select id_usuario from usuario where nome_usuario="+user.getNick();
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				currentUser.setId(rs.getInt("id_usuario"));
+			}
+
+			stmt.close();
+			
 			
 		} catch (Exception e) {
-			throw new RuntimeException(e);
+			
 		}
 		
+		return currentUser;
 	}
 }

@@ -6,5 +6,5 @@ import model.Message;
 public interface MessageDAO {
 	
 	public List<Message> getAllMessages();
-	public boolean addMessage(Message user);
+	public boolean addMessage(Message user, int userId);
 }

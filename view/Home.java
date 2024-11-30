@@ -23,6 +23,8 @@ public class Home {
 
     private JButton newPost;
 
+    ArrayList<Message> mensagens;
+
     public Home() {
         this.currentUser = new User();
 
@@ -35,6 +37,8 @@ public class Home {
         this.scroll = new JScrollPane(this.right);
 
         this.newPost = new JButton("Novo");
+
+        mensagens = new ArrayList<>();
     }
 
     private void makeLeftPanel() {
@@ -104,10 +108,8 @@ public class Home {
         return messageBox;
     }
 
-    private void makeRightPanel() throws SQLException {
+    private void makeRightPanel() {
         this.right.setLayout(new BoxLayout(this.right, BoxLayout.Y_AXIS));
-        MessageActions messages = new MessageActions();
-        ArrayList<Message> mensagens = messages.getAllMessages();
 
         for(int i = 0; i <= mensagens.size()-1; i++){
             if(i == 0) {
@@ -152,5 +154,10 @@ public class Home {
     public void updateCurrentUser(User currentUser) {
         this.currentUser = currentUser;
         this.name.setText(this.currentUser.getNick());
+    }
+
+    public void setMessages(ArrayList<Message> messages) {
+        this.mensagens = messages;
+        makeRightPanel();
     }
 }

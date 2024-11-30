@@ -4,5 +4,5 @@ import model.User;
 
 public interface UserDAO {
 	
-	public boolean adicionaUser(User user);
+	public User adicionaUser(User user);
 }

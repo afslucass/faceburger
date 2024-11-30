@@ -1,6 +1,8 @@
 import javax.swing.*;
 
+import controller.MessageActions;
 import controller.UserActions;
+import model.Message;
 import model.User;
 import view.Home;
 import view.Login;
@@ -8,6 +10,7 @@ import view.Post;
 
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -32,17 +35,27 @@ public class Main {
         mainPanel.add(post.getPanel(), "post");
         
         UserActions user = new UserActions();
+        MessageActions messages = new MessageActions();
 
         login.getContinueButton().addActionListener(e -> {
+            ArrayList<Message> mensagens = messages.getAllMessages();
+
             currentUser.setNick(login.getNameInputText());
-            user.adicionaUser(currentUser);
+            currentUser.setId(user.adicionaUser(currentUser).getId());
             home.updateCurrentUser(currentUser);
+            home.setMessages(mensagens);
+            
             post.updateCurrentUser(currentUser);
 
             cardLayout.show(mainPanel, "home");
         });
         home.getNewButton().addActionListener(e -> cardLayout.show(mainPanel, "post"));
-        post.getPostButton().addActionListener(e -> cardLayout.show(mainPanel, "home"));
+        post.getPostButton().addActionListener(e -> {
+            ArrayList<Message> mensagens = messages.getAllMessages();
+
+            home.setMessages(mensagens);
+            cardLayout.show(mainPanel, "home");
+        });
         
         
         frame.add(mainPanel);
